@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
  * Metadata
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 public class Metadata extends ArrayList<MetadataInner>  {
 

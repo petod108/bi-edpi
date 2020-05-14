@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import io.swagger.model.Error;
 import io.swagger.model.Product;
+import io.swagger.model.ProductDefinition;
 import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 @Controller
 public class ProductsApiController implements ProductsApi {
@@ -43,7 +44,7 @@ public class ProductsApiController implements ProductsApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Product>>(objectMapper.readValue("[ {  \"idProduct\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"survey\" : \"\"}, {  \"idProduct\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"survey\" : \"\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<Product>>(objectMapper.readValue("[ {  \"image\" : \"/images/componentRSystem.gif\",  \"name\" : \"RSystem\",  \"description\" : \"description\",  \"id\" : \"id\"}, {  \"image\" : \"/images/componentRSystem.gif\",  \"name\" : \"RSystem\",  \"description\" : \"description\",  \"id\" : \"id\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<List<Product>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,7 +54,7 @@ public class ProductsApiController implements ProductsApi {
         return new ResponseEntity<List<Product>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Object> productsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Product product) {
+    public ResponseEntity<Object> productsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ProductDefinition product) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -72,21 +73,21 @@ public class ProductsApiController implements ProductsApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Product> productsProductIdGet(@ApiParam(value = "",required=true) @PathVariable("productId") UUID productId) {
+    public ResponseEntity<ProductDefinition> productsProductIdGet(@ApiParam(value = "",required=true) @PathVariable("productId") UUID productId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Product>(objectMapper.readValue("{  \"idProduct\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"survey\" : \"\"}", Product.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<ProductDefinition>(objectMapper.readValue("\"\"", ProductDefinition.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<ProductDefinition>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Product>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<ProductDefinition>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> productsPut(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Product product) {
+    public ResponseEntity<Void> productsPut(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ProductDefinition product) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }

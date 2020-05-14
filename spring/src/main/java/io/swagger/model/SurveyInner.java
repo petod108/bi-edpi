@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.SurveyInnerAnswersPerEnvironment;
-import java.util.ArrayList;
-import java.util.List;
+import io.swagger.model.Answer;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -16,15 +14,14 @@ import javax.validation.constraints.*;
  * SurveyInner
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 public class SurveyInner   {
   @JsonProperty("questionVarName")
   private String questionVarName = null;
 
-  @JsonProperty("AnswersPerEnvironment")
-  @Valid
-  private List<SurveyInnerAnswersPerEnvironment> answersPerEnvironment = null;
+  @JsonProperty("Answer")
+  private Answer answer = null;
 
   public SurveyInner questionVarName(String questionVarName) {
     this.questionVarName = questionVarName;
@@ -32,10 +29,10 @@ public class SurveyInner   {
   }
 
   /**
-   * Get questionVarName
+   * Question?
    * @return questionVarName
   **/
-  @ApiModelProperty(example = "setting name", value = "")
+  @ApiModelProperty(example = "setting name", value = "Question?")
 
 
   public String getQuestionVarName() {
@@ -46,33 +43,25 @@ public class SurveyInner   {
     this.questionVarName = questionVarName;
   }
 
-  public SurveyInner answersPerEnvironment(List<SurveyInnerAnswersPerEnvironment> answersPerEnvironment) {
-    this.answersPerEnvironment = answersPerEnvironment;
-    return this;
-  }
-
-  public SurveyInner addAnswersPerEnvironmentItem(SurveyInnerAnswersPerEnvironment answersPerEnvironmentItem) {
-    if (this.answersPerEnvironment == null) {
-      this.answersPerEnvironment = new ArrayList<SurveyInnerAnswersPerEnvironment>();
-    }
-    this.answersPerEnvironment.add(answersPerEnvironmentItem);
+  public SurveyInner answer(Answer answer) {
+    this.answer = answer;
     return this;
   }
 
   /**
-   * Get answersPerEnvironment
-   * @return answersPerEnvironment
+   * Get answer
+   * @return answer
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public List<SurveyInnerAnswersPerEnvironment> getAnswersPerEnvironment() {
-    return answersPerEnvironment;
+  public Answer getAnswer() {
+    return answer;
   }
 
-  public void setAnswersPerEnvironment(List<SurveyInnerAnswersPerEnvironment> answersPerEnvironment) {
-    this.answersPerEnvironment = answersPerEnvironment;
+  public void setAnswer(Answer answer) {
+    this.answer = answer;
   }
 
 
@@ -86,12 +75,12 @@ public class SurveyInner   {
     }
     SurveyInner surveyInner = (SurveyInner) o;
     return Objects.equals(this.questionVarName, surveyInner.questionVarName) &&
-        Objects.equals(this.answersPerEnvironment, surveyInner.answersPerEnvironment);
+        Objects.equals(this.answer, surveyInner.answer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(questionVarName, answersPerEnvironment);
+    return Objects.hash(questionVarName, answer);
   }
 
   @Override
@@ -100,7 +89,7 @@ public class SurveyInner   {
     sb.append("class SurveyInner {\n");
     
     sb.append("    questionVarName: ").append(toIndentedString(questionVarName)).append("\n");
-    sb.append("    answersPerEnvironment: ").append(toIndentedString(answersPerEnvironment)).append("\n");
+    sb.append("    answer: ").append(toIndentedString(answer)).append("\n");
     sb.append("}");
     return sb.toString();
   }

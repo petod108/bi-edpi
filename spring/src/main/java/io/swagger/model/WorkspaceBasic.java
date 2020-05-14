@@ -5,61 +5,65 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.UUID;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * MetadataInner
+ * WorkspaceBasic
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
-public class MetadataInner   {
-  @JsonProperty("key")
-  private String key = null;
+public class WorkspaceBasic   {
+  @JsonProperty("id")
+  private UUID id = null;
 
-  @JsonProperty("value")
-  private String value = null;
+  @JsonProperty("name")
+  private String name = null;
 
-  public MetadataInner key(String key) {
-    this.key = key;
+  public WorkspaceBasic id(UUID id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get key
-   * @return key
+   * Get id
+   * @return id
   **/
-  @ApiModelProperty(example = "Metadata key", value = "")
+  @ApiModelProperty(example = "d290f1ee-6c54-4b01-90e6-d701748f0851", required = true, value = "")
+  @NotNull
 
+  @Valid
 
-  public String getKey() {
-    return key;
+  public UUID getId() {
+    return id;
   }
 
-  public void setKey(String key) {
-    this.key = key;
+  public void setId(UUID id) {
+    this.id = id;
   }
 
-  public MetadataInner value(String value) {
-    this.value = value;
+  public WorkspaceBasic name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get value
-   * @return value
+   * Get name
+   * @return name
   **/
-  @ApiModelProperty(example = "Metadata value", value = "")
+  @ApiModelProperty(example = "RStudio", required = true, value = "")
+  @NotNull
 
 
-  public String getValue() {
-    return value;
+  public String getName() {
+    return name;
   }
 
-  public void setValue(String value) {
-    this.value = value;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -71,23 +75,23 @@ public class MetadataInner   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MetadataInner metadataInner = (MetadataInner) o;
-    return Objects.equals(this.key, metadataInner.key) &&
-        Objects.equals(this.value, metadataInner.value);
+    WorkspaceBasic workspaceBasic = (WorkspaceBasic) o;
+    return Objects.equals(this.id, workspaceBasic.id) &&
+        Objects.equals(this.name, workspaceBasic.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value);
+    return Objects.hash(id, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class MetadataInner {\n");
+    sb.append("class WorkspaceBasic {\n");
     
-    sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

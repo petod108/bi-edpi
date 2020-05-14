@@ -5,61 +5,51 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.EnvironmentName;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * MetadataInner
+ * 
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
-public class MetadataInner   {
-  @JsonProperty("key")
-  private String key = null;
+public class    {
+  @JsonProperty("Environments")
+  @Valid
+  private List<EnvironmentName> environments = null;
 
-  @JsonProperty("value")
-  private String value = null;
+  public  environments(List<EnvironmentName> environments) {
+    this.environments = environments;
+    return this;
+  }
 
-  public MetadataInner key(String key) {
-    this.key = key;
+  public  addEnvironmentsItem(EnvironmentName environmentsItem) {
+    if (this.environments == null) {
+      this.environments = new ArrayList<EnvironmentName>();
+    }
+    this.environments.add(environmentsItem);
     return this;
   }
 
   /**
-   * Get key
-   * @return key
+   * Get environments
+   * @return environments
   **/
-  @ApiModelProperty(example = "Metadata key", value = "")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getKey() {
-    return key;
+  public List<EnvironmentName> getEnvironments() {
+    return environments;
   }
 
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public MetadataInner value(String value) {
-    this.value = value;
-    return this;
-  }
-
-  /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(example = "Metadata value", value = "")
-
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setEnvironments(List<EnvironmentName> environments) {
+    this.environments = environments;
   }
 
 
@@ -71,23 +61,21 @@ public class MetadataInner   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MetadataInner metadataInner = (MetadataInner) o;
-    return Objects.equals(this.key, metadataInner.key) &&
-        Objects.equals(this.value, metadataInner.value);
+      = () o;
+    return Objects.equals(this.environments, .environments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value);
+    return Objects.hash(environments);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class MetadataInner {\n");
+    sb.append("class  {\n");
     
-    sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    environments: ").append(toIndentedString(environments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

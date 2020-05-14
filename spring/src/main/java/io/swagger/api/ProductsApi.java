@@ -7,6 +7,7 @@ package io.swagger.api;
 
 import io.swagger.model.Error;
 import io.swagger.model.Product;
+import io.swagger.model.ProductDefinition;
 import java.util.UUID;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 @Api(value = "products", description = "the products API")
 @RequestMapping(value = "")
@@ -44,7 +45,7 @@ public interface ProductsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"idProduct\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"survey\" : \"\"}, {  \"idProduct\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"survey\" : \"\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"image\" : \"/images/componentRSystem.gif\",  \"name\" : \"RSystem\",  \"description\" : \"description\",  \"id\" : \"id\"}, {  \"image\" : \"/images/componentRSystem.gif\",  \"name\" : \"RSystem\",  \"description\" : \"description\",  \"id\" : \"id\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,7 +60,7 @@ public interface ProductsApi {
 
     @ApiOperation(value = "As user, I want to create product", nickname = "productsPost", notes = "As user, I want to create product", response = Object.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = Object.class),
+        @ApiResponse(code = 200, message = "ID of new product", response = Object.class),
         @ApiResponse(code = 400, message = "", response = Error.class),
         @ApiResponse(code = 401, message = "", response = Error.class),
         @ApiResponse(code = 403, message = "", response = Error.class),
@@ -69,7 +70,7 @@ public interface ProductsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Object> productsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Product product) {
+    default ResponseEntity<Object> productsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ProductDefinition product) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -105,9 +106,9 @@ public interface ProductsApi {
     }
 
 
-    @ApiOperation(value = "As user, I want to see detail of one product", nickname = "productsProductIdGet", notes = "As user, I want to see detail of one product", response = Product.class, tags={  })
+    @ApiOperation(value = "As user, I want to see detail of one product", nickname = "productsProductIdGet", notes = "As user, I want to see detail of one product", response = ProductDefinition.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = Product.class),
+        @ApiResponse(code = 200, message = "search results matching criteria", response = ProductDefinition.class),
         @ApiResponse(code = 400, message = "", response = Error.class),
         @ApiResponse(code = 401, message = "", response = Error.class),
         @ApiResponse(code = 403, message = "", response = Error.class),
@@ -116,11 +117,11 @@ public interface ProductsApi {
     @RequestMapping(value = "/products/{productId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<Product> productsProductIdGet(@ApiParam(value = "",required=true) @PathVariable("productId") UUID productId) {
+    default ResponseEntity<ProductDefinition> productsProductIdGet(@ApiParam(value = "",required=true) @PathVariable("productId") UUID productId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"idProduct\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"survey\" : \"\"}", Product.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", ProductDefinition.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -145,7 +146,7 @@ public interface ProductsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    default ResponseEntity<Void> productsPut(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Product product) {
+    default ResponseEntity<Void> productsPut(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ProductDefinition product) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default ProductsApi interface so no example is generated");

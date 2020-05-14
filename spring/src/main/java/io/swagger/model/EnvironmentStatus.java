@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.EnvironmentName;
-import io.swagger.model.Metadata;
 import io.swagger.model.Status;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -16,7 +15,7 @@ import javax.validation.constraints.*;
  * EnvironmentStatus
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 public class EnvironmentStatus   {
   @JsonProperty("environmentName")
@@ -24,9 +23,6 @@ public class EnvironmentStatus   {
 
   @JsonProperty("status")
   private Status status = null;
-
-  @JsonProperty("metaData")
-  private Metadata metaData = null;
 
   public EnvironmentStatus environmentName(EnvironmentName environmentName) {
     this.environmentName = environmentName;
@@ -70,27 +66,6 @@ public class EnvironmentStatus   {
     this.status = status;
   }
 
-  public EnvironmentStatus metaData(Metadata metaData) {
-    this.metaData = metaData;
-    return this;
-  }
-
-  /**
-   * Get metaData
-   * @return metaData
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public Metadata getMetaData() {
-    return metaData;
-  }
-
-  public void setMetaData(Metadata metaData) {
-    this.metaData = metaData;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -102,13 +77,12 @@ public class EnvironmentStatus   {
     }
     EnvironmentStatus environmentStatus = (EnvironmentStatus) o;
     return Objects.equals(this.environmentName, environmentStatus.environmentName) &&
-        Objects.equals(this.status, environmentStatus.status) &&
-        Objects.equals(this.metaData, environmentStatus.metaData);
+        Objects.equals(this.status, environmentStatus.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(environmentName, status, metaData);
+    return Objects.hash(environmentName, status);
   }
 
   @Override
@@ -118,7 +92,6 @@ public class EnvironmentStatus   {
     
     sb.append("    environmentName: ").append(toIndentedString(environmentName)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    metaData: ").append(toIndentedString(metaData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

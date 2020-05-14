@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.Survey;
-import java.util.UUID;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,57 +13,99 @@ import javax.validation.constraints.*;
  * Product
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 public class Product   {
-  @JsonProperty("idProduct")
-  private UUID idProduct = null;
+  @JsonProperty("id")
+  private String id = null;
 
-  @JsonProperty("survey")
-  private Survey survey = null;
+  @JsonProperty("name")
+  private String name = null;
 
-  public Product idProduct(UUID idProduct) {
-    this.idProduct = idProduct;
+  @JsonProperty("description")
+  private String description = null;
+
+  @JsonProperty("image")
+  private String image = null;
+
+  public Product id(String id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get idProduct
-   * @return idProduct
+   * Get id
+   * @return id
   **/
-  @ApiModelProperty(example = "d290f1ee-6c54-4b01-90e6-d701748f0851", required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
 
-  @Valid
 
-  public UUID getIdProduct() {
-    return idProduct;
+  public String getId() {
+    return id;
   }
 
-  public void setIdProduct(UUID idProduct) {
-    this.idProduct = idProduct;
+  public void setId(String id) {
+    this.id = id;
   }
 
-  public Product survey(Survey survey) {
-    this.survey = survey;
+  public Product name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get survey
-   * @return survey
+   * Get name
+   * @return name
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(example = "RSystem", value = "")
 
-  @Valid
 
-  public Survey getSurvey() {
-    return survey;
+  public String getName() {
+    return name;
   }
 
-  public void setSurvey(Survey survey) {
-    this.survey = survey;
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Product description(String description) {
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Description of RSystem
+   * @return description
+  **/
+  @ApiModelProperty(value = "Description of RSystem")
+
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Product image(String image) {
+    this.image = image;
+    return this;
+  }
+
+  /**
+   * Path to the image
+   * @return image
+  **/
+  @ApiModelProperty(example = "/images/componentRSystem.gif", value = "Path to the image")
+
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
   }
 
 
@@ -78,13 +118,15 @@ public class Product   {
       return false;
     }
     Product product = (Product) o;
-    return Objects.equals(this.idProduct, product.idProduct) &&
-        Objects.equals(this.survey, product.survey);
+    return Objects.equals(this.id, product.id) &&
+        Objects.equals(this.name, product.name) &&
+        Objects.equals(this.description, product.description) &&
+        Objects.equals(this.image, product.image);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idProduct, survey);
+    return Objects.hash(id, name, description, image);
   }
 
   @Override
@@ -92,8 +134,10 @@ public class Product   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Product {\n");
     
-    sb.append("    idProduct: ").append(toIndentedString(idProduct)).append("\n");
-    sb.append("    survey: ").append(toIndentedString(survey)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("}");
     return sb.toString();
   }

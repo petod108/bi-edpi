@@ -1,10 +1,12 @@
 package io.swagger.api;
 
-import io.swagger.model.Component;
+import io.swagger.model.ComponentInstance;
+import io.swagger.model.ComponentInstanceMetadataSurvey;
 import io.swagger.model.Error;
-import io.swagger.model.Product;
+import io.swagger.model.ProductSurvey;
 import java.util.UUID;
 import io.swagger.model.Workspace;
+import io.swagger.model.WorkspaceBasic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -24,7 +26,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 @Controller
 public class WorkspacesApiController implements WorkspacesApi {
@@ -41,18 +43,18 @@ public class WorkspacesApiController implements WorkspacesApi {
         this.request = request;
     }
 
-    public ResponseEntity<Component> addProduct(@ApiParam(value = "Product definition" ,required=true )  @Valid @RequestBody Product productDefinition,@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
+    public ResponseEntity<Object> addProduct(@ApiParam(value = "Product definition" ,required=true )  @Valid @RequestBody ProductSurvey productDefinition,@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Component>(objectMapper.readValue("\"\"", Component.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Object>(objectMapper.readValue("\"{}\"", Object.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Component>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Component>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<Object>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Object> createWorkspace(@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody Workspace ) {
@@ -79,12 +81,26 @@ public class WorkspacesApiController implements WorkspacesApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateComponentInAllEnvironmentsOfWorkspace(@ApiParam(value = "component" ,required=true )  @Valid @RequestBody Component component,@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId) {
+    public ResponseEntity<List<ComponentInstance>> getComponentList(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                return new ResponseEntity<List<ComponentInstance>>(objectMapper.readValue("[ {  \"name\" : \"name\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : { },    \"status\" : { }  }, {    \"environmentName\" : { },    \"status\" : { }  } ]}, {  \"name\" : \"name\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : { },    \"status\" : { }  }, {    \"environmentName\" : { },    \"status\" : { }  } ]} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+            } catch (IOException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<List<ComponentInstance>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<List<ComponentInstance>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Void> submitWorkspace(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody  ) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateComponentStatusInEnvironmentOfWorkspace(@ApiParam(value = "status" ,required=true )  @Valid @RequestBody Object status,@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "",required=true) @PathVariable("componentId") UUID componentId,@ApiParam(value = "",required=true, allowableValues = "\"DEV\", \"QA\", \"PROD\"") @PathVariable("envName") String envName) {
+    public ResponseEntity<Void> updateComponentInAllEnvironmentsOfWorkspace(@ApiParam(value = "component" ,required=true )  @Valid @RequestBody ComponentInstanceMetadataSurvey component,@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
@@ -94,53 +110,39 @@ public class WorkspacesApiController implements WorkspacesApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Workspace>> workspacesGet() {
+    public ResponseEntity<List<WorkspaceBasic>> workspacesGet() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Workspace>>(objectMapper.readValue("[ {  \"Environments\" : [ \"Environments\", \"Environments\" ],  \"CI\" : \"BI-AS-DATALAKE\",  \"name\" : \"RStudio\",  \"groups\" : [ \"BI-LINUX\", \"BI-USER\" ],  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"}, {  \"Environments\" : [ \"Environments\", \"Environments\" ],  \"CI\" : \"BI-AS-DATALAKE\",  \"name\" : \"RStudio\",  \"groups\" : [ \"BI-LINUX\", \"BI-USER\" ],  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<WorkspaceBasic>>(objectMapper.readValue("[ {  \"name\" : \"RStudio\",  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"}, {  \"name\" : \"RStudio\",  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Workspace>>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<List<WorkspaceBasic>>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<List<Workspace>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<List<WorkspaceBasic>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Component> workspacesWorkspaceIdComponentsComponentIdGet(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "",required=true) @PathVariable("componentId") UUID componentId) {
+    public ResponseEntity<ComponentInstanceMetadataSurvey> workspacesWorkspaceIdComponentsComponentIdGet(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "",required=true) @PathVariable("componentId") UUID componentId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Component>(objectMapper.readValue("\"\"", Component.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<ComponentInstanceMetadataSurvey>(objectMapper.readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : { },    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : { },      \"status\" : { }    }  }, {    \"environment\" : { },    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : { },      \"status\" : { }    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Component>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<ComponentInstanceMetadataSurvey>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Component>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<List<Component>> workspacesWorkspaceIdComponentsGet(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Component>>(objectMapper.readValue("[ \"\", \"\" ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Component>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<List<Component>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<ComponentInstanceMetadataSurvey>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Workspace> workspacesWorkspaceIdGet(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Workspace>(objectMapper.readValue("{  \"Environments\" : [ \"Environments\", \"Environments\" ],  \"CI\" : \"BI-AS-DATALAKE\",  \"name\" : \"RStudio\",  \"groups\" : [ \"BI-LINUX\", \"BI-USER\" ],  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"}", Workspace.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Workspace>(objectMapper.readValue("\"\"", Workspace.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Workspace>(HttpStatus.INTERNAL_SERVER_ERROR);

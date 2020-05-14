@@ -5,61 +5,50 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.Product;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * MetadataInner
+ * ProductDefinition
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
-public class MetadataInner   {
-  @JsonProperty("key")
-  private String key = null;
+public class ProductDefinition extends Product  {
+  @JsonProperty("definition")
+  @Valid
+  private List<String> definition = null;
 
-  @JsonProperty("value")
-  private String value = null;
+  public ProductDefinition definition(List<String> definition) {
+    this.definition = definition;
+    return this;
+  }
 
-  public MetadataInner key(String key) {
-    this.key = key;
+  public ProductDefinition addDefinitionItem(String definitionItem) {
+    if (this.definition == null) {
+      this.definition = new ArrayList<String>();
+    }
+    this.definition.add(definitionItem);
     return this;
   }
 
   /**
-   * Get key
-   * @return key
+   * Get definition
+   * @return definition
   **/
-  @ApiModelProperty(example = "Metadata key", value = "")
+  @ApiModelProperty(value = "")
 
 
-  public String getKey() {
-    return key;
+  public List<String> getDefinition() {
+    return definition;
   }
 
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public MetadataInner value(String value) {
-    this.value = value;
-    return this;
-  }
-
-  /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(example = "Metadata value", value = "")
-
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setDefinition(List<String> definition) {
+    this.definition = definition;
   }
 
 
@@ -71,23 +60,22 @@ public class MetadataInner   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MetadataInner metadataInner = (MetadataInner) o;
-    return Objects.equals(this.key, metadataInner.key) &&
-        Objects.equals(this.value, metadataInner.value);
+    ProductDefinition productDefinition = (ProductDefinition) o;
+    return Objects.equals(this.definition, productDefinition.definition) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value);
+    return Objects.hash(definition, super.hashCode());
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class MetadataInner {\n");
-    
-    sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("class ProductDefinition {\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    definition: ").append(toIndentedString(definition)).append("\n");
     sb.append("}");
     return sb.toString();
   }

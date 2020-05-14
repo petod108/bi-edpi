@@ -5,11 +5,13 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.Component;
+import io.swagger.model.ComponentInstance;
+import io.swagger.model.ComponentInstanceMetadataSurvey;
 import io.swagger.model.Error;
-import io.swagger.model.Product;
+import io.swagger.model.ProductSurvey;
 import java.util.UUID;
 import io.swagger.model.Workspace;
+import io.swagger.model.WorkspaceBasic;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,24 +27,29 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
 
 @Api(value = "workspaces", description = "the workspaces API")
 @RequestMapping(value = "")
 public interface WorkspacesApi {
 
-    @ApiOperation(value = "Add product to workspace", nickname = "addProduct", notes = "As user, I want to add a new Product to the workspace", response = Component.class, tags={  })
+    @ApiOperation(value = "Add product to workspace", nickname = "addProduct", notes = "As user, I want to add a new Product to the workspace", response = Object.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "", response = Component.class) })
+        @ApiResponse(code = 200, message = "ID of created Component", response = Object.class),
+        @ApiResponse(code = 400, message = "", response = Error.class),
+        @ApiResponse(code = 401, message = "", response = Error.class),
+        @ApiResponse(code = 403, message = "", response = Error.class),
+        @ApiResponse(code = 404, message = "", response = Error.class),
+        @ApiResponse(code = 500, message = "", response = Error.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}/components",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Component> addProduct(@ApiParam(value = "Product definition" ,required=true )  @Valid @RequestBody Product productDefinition,@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
+    default ResponseEntity<Object> addProduct(@ApiParam(value = "Product definition" ,required=true )  @Valid @RequestBody ProductSurvey productDefinition,@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", Component.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"{}\"", Object.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -106,7 +113,7 @@ public interface WorkspacesApi {
 
     @ApiOperation(value = "Delete a workspace", nickname = "deleteWorkspace", notes = "As user, I want to delete a workspace", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 205, message = "OK"),
+        @ApiResponse(code = 204, message = "OK"),
         @ApiResponse(code = 400, message = "", response = Error.class),
         @ApiResponse(code = 401, message = "", response = Error.class),
         @ApiResponse(code = 403, message = "", response = Error.class),
@@ -115,6 +122,54 @@ public interface WorkspacesApi {
     @RequestMapping(value = "/workspaces/{workspaceId}",
         method = RequestMethod.DELETE)
     default ResponseEntity<Void> deleteWorkspace(@ApiParam(value = "ID of workspace that needs to be deleted",required=true) @PathVariable("workspaceId") UUID workspaceId) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "As user, I want to see components in the workspace", nickname = "getComponentList", notes = "As user, I want to see components in the workspace", response = ComponentInstance.class, responseContainer = "List", tags={  })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "search results matching criteria. Array of components with their status", response = ComponentInstance.class, responseContainer = "List"),
+        @ApiResponse(code = 400, message = "", response = Error.class),
+        @ApiResponse(code = 401, message = "", response = Error.class),
+        @ApiResponse(code = 403, message = "", response = Error.class),
+        @ApiResponse(code = 404, message = "", response = Error.class),
+        @ApiResponse(code = 500, message = "", response = Error.class) })
+    @RequestMapping(value = "/workspaces/{workspaceId}/components",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    default ResponseEntity<List<ComponentInstance>> getComponentList(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"name\" : \"name\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : { },    \"status\" : { }  }, {    \"environmentName\" : { },    \"status\" : { }  } ]}, {  \"name\" : \"name\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : { },    \"status\" : { }  }, {    \"environmentName\" : { },    \"status\" : { }  } ]} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "Submit for approving the workspace", nickname = "submitWorkspace", notes = "As user, I want to submit the workspace", tags={  })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 204, message = "OK"),
+        @ApiResponse(code = 400, message = "", response = Error.class),
+        @ApiResponse(code = 401, message = "", response = Error.class),
+        @ApiResponse(code = 403, message = "", response = Error.class),
+        @ApiResponse(code = 404, message = "", response = Error.class),
+        @ApiResponse(code = 500, message = "", response = Error.class) })
+    @RequestMapping(value = "/workspaces/{workspaceId}",
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    default ResponseEntity<Void> submitWorkspace(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody  ) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
@@ -134,27 +189,7 @@ public interface WorkspacesApi {
     @RequestMapping(value = "/workspaces/{workspaceId}/components",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    default ResponseEntity<Void> updateComponentInAllEnvironmentsOfWorkspace(@ApiParam(value = "component" ,required=true )  @Valid @RequestBody Component component,@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-
-    @ApiOperation(value = "Change status of component inside of workspace's environment", nickname = "updateComponentStatusInEnvironmentOfWorkspace", notes = "As user, I want to change status of component inside of workspace's environment", tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 202, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
-    @RequestMapping(value = "/workspaces/{workspaceId}/components/{componentId}/environments/{envName}",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    default ResponseEntity<Void> updateComponentStatusInEnvironmentOfWorkspace(@ApiParam(value = "status" ,required=true )  @Valid @RequestBody Object status,@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "",required=true) @PathVariable("componentId") UUID componentId,@ApiParam(value = "",required=true, allowableValues = "\"DEV\", \"QA\", \"PROD\"") @PathVariable("envName") String envName) {
+    default ResponseEntity<Void> updateComponentInAllEnvironmentsOfWorkspace(@ApiParam(value = "component" ,required=true )  @Valid @RequestBody ComponentInstanceMetadataSurvey component,@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
@@ -184,9 +219,9 @@ public interface WorkspacesApi {
     }
 
 
-    @ApiOperation(value = "As user, I want to see my workspaces", nickname = "workspacesGet", notes = "As user, I want to see my workspaces", response = Workspace.class, responseContainer = "List", tags={  })
+    @ApiOperation(value = "As user, I want to see my workspaces", nickname = "workspacesGet", notes = "As user, I want to see my workspaces", response = WorkspaceBasic.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = Workspace.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "search results matching criteria", response = WorkspaceBasic.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "", response = Error.class),
         @ApiResponse(code = 401, message = "", response = Error.class),
         @ApiResponse(code = 403, message = "", response = Error.class),
@@ -195,11 +230,11 @@ public interface WorkspacesApi {
     @RequestMapping(value = "/workspaces",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<Workspace>> workspacesGet() {
+    default ResponseEntity<List<WorkspaceBasic>> workspacesGet() {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"Environments\" : [ \"Environments\", \"Environments\" ],  \"CI\" : \"BI-AS-DATALAKE\",  \"name\" : \"RStudio\",  \"groups\" : [ \"BI-LINUX\", \"BI-USER\" ],  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"}, {  \"Environments\" : [ \"Environments\", \"Environments\" ],  \"CI\" : \"BI-AS-DATALAKE\",  \"name\" : \"RStudio\",  \"groups\" : [ \"BI-LINUX\", \"BI-USER\" ],  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"name\" : \"RStudio\",  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"}, {  \"name\" : \"RStudio\",  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -212,9 +247,9 @@ public interface WorkspacesApi {
     }
 
 
-    @ApiOperation(value = "As user, I want to see component of workspace", nickname = "workspacesWorkspaceIdComponentsComponentIdGet", notes = "As user, I want to see component of workspace", response = Component.class, tags={  })
+    @ApiOperation(value = "As user, I want to see component of workspace", nickname = "workspacesWorkspaceIdComponentsComponentIdGet", notes = "As user, I want to see component of workspace", response = ComponentInstanceMetadataSurvey.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = Component.class),
+        @ApiResponse(code = 200, message = "search results matching criteria", response = ComponentInstanceMetadataSurvey.class),
         @ApiResponse(code = 400, message = "", response = Error.class),
         @ApiResponse(code = 401, message = "", response = Error.class),
         @ApiResponse(code = 403, message = "", response = Error.class),
@@ -223,39 +258,11 @@ public interface WorkspacesApi {
     @RequestMapping(value = "/workspaces/{workspaceId}/components/{componentId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<Component> workspacesWorkspaceIdComponentsComponentIdGet(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "",required=true) @PathVariable("componentId") UUID componentId) {
+    default ResponseEntity<ComponentInstanceMetadataSurvey> workspacesWorkspaceIdComponentsComponentIdGet(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "",required=true) @PathVariable("componentId") UUID componentId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", Component.class), HttpStatus.NOT_IMPLEMENTED);
-                } catch (IOException e) {
-                    log.error("Couldn't serialize response for content type application/json", e);
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-        } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-
-    @ApiOperation(value = "As user, I want to see components in the workspace", nickname = "workspacesWorkspaceIdComponentsGet", notes = "As user, I want to see components in the workspace", response = Component.class, responseContainer = "List", tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = Component.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
-    @RequestMapping(value = "/workspaces/{workspaceId}/components",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<List<Component>> workspacesWorkspaceIdComponentsGet(@ApiParam(value = "",required=true) @PathVariable("workspaceId") UUID workspaceId) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-            if (getAcceptHeader().get().contains("application/json")) {
-                try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ \"\", \"\" ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : { },    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : { },      \"status\" : { }    }  }, {    \"environment\" : { },    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : { },      \"status\" : { }    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -283,7 +290,7 @@ public interface WorkspacesApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"Environments\" : [ \"Environments\", \"Environments\" ],  \"CI\" : \"BI-AS-DATALAKE\",  \"name\" : \"RStudio\",  \"groups\" : [ \"BI-LINUX\", \"BI-USER\" ],  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\"}", Workspace.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", Workspace.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
