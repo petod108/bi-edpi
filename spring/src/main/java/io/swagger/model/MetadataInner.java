@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * MetadataInner
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T12:42:30.334Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T16:38:58.629Z")
 
 public class MetadataInner   {
   @JsonProperty("key")
