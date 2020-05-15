@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.Product;
+import io.swagger.model.Question;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
@@ -16,39 +17,40 @@ import javax.validation.constraints.*;
  * ProductDefinition
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:22.170Z")
 
 public class ProductDefinition extends Product  {
-  @JsonProperty("definition")
+  @JsonProperty("QuestionList")
   @Valid
-  private List<String> definition = null;
+  private List<Question> questionList = null;
 
-  public ProductDefinition definition(List<String> definition) {
-    this.definition = definition;
+  public ProductDefinition questionList(List<Question> questionList) {
+    this.questionList = questionList;
     return this;
   }
 
-  public ProductDefinition addDefinitionItem(String definitionItem) {
-    if (this.definition == null) {
-      this.definition = new ArrayList<String>();
+  public ProductDefinition addQuestionListItem(Question questionListItem) {
+    if (this.questionList == null) {
+      this.questionList = new ArrayList<Question>();
     }
-    this.definition.add(definitionItem);
+    this.questionList.add(questionListItem);
     return this;
   }
 
   /**
-   * Get definition
-   * @return definition
+   * Get questionList
+   * @return questionList
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public List<String> getDefinition() {
-    return definition;
+  public List<Question> getQuestionList() {
+    return questionList;
   }
 
-  public void setDefinition(List<String> definition) {
-    this.definition = definition;
+  public void setQuestionList(List<Question> questionList) {
+    this.questionList = questionList;
   }
 
 
@@ -61,13 +63,13 @@ public class ProductDefinition extends Product  {
       return false;
     }
     ProductDefinition productDefinition = (ProductDefinition) o;
-    return Objects.equals(this.definition, productDefinition.definition) &&
+    return Objects.equals(this.questionList, productDefinition.questionList) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(definition, super.hashCode());
+    return Objects.hash(questionList, super.hashCode());
   }
 
   @Override
@@ -75,7 +77,7 @@ public class ProductDefinition extends Product  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ProductDefinition {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    definition: ").append(toIndentedString(definition)).append("\n");
+    sb.append("    questionList: ").append(toIndentedString(questionList)).append("\n");
     sb.append("}");
     return sb.toString();
   }

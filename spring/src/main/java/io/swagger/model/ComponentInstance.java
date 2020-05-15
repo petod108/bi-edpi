@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  * ComponentInstance
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:22.170Z")
 
 public class ComponentInstance   {
   @JsonProperty("name")
@@ -35,7 +35,7 @@ public class ComponentInstance   {
    * Get name
    * @return name
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "RStudio component", value = "")
 
 
   public String getName() {

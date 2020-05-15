@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-14T17:02:23.621Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:22.170Z")
 
 @Api(value = "workspaces", description = "the workspaces API")
 @RequestMapping(value = "")
@@ -145,7 +145,7 @@ public interface WorkspacesApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"name\" : \"name\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : { },    \"status\" : { }  }, {    \"environmentName\" : { },    \"status\" : { }  } ]}, {  \"name\" : \"name\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : { },    \"status\" : { }  }, {    \"environmentName\" : { },    \"status\" : { }  } ]} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"name\" : \"RStudio component\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : \"DEV\",    \"status\" : \"READY\"  }, {    \"environmentName\" : \"DEV\",    \"status\" : \"READY\"  } ]}, {  \"name\" : \"RStudio component\",  \"EnvironmentsStatus\" : [ {    \"environmentName\" : \"DEV\",    \"status\" : \"READY\"  }, {    \"environmentName\" : \"DEV\",    \"status\" : \"READY\"  } ]} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -262,7 +262,7 @@ public interface WorkspacesApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : { },    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : { },      \"status\" : { }    }  }, {    \"environment\" : { },    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : { },      \"status\" : { }    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : \"DEV\",    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  }, {    \"environment\" : \"DEV\",    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
