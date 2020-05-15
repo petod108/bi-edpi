@@ -1,6 +1,6 @@
 package io.swagger.api;
 
-import io.swagger.model.Error;
+import io.swagger.model.ModelError;
 import io.swagger.model.Product;
 import io.swagger.model.ProductDefinition;
 import java.util.UUID;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
 @Controller
 public class ProductsApiController implements ProductsApi {

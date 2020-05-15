@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.ComponentType;
-import io.swagger.model.DeployRegion;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,9 +14,9 @@ import javax.validation.constraints.*;
  * Question
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
-public class Question extends ComponentType  {
+public class Question   {
   @JsonProperty("prompt")
   private String prompt = null;
 
@@ -214,20 +211,19 @@ public class Question extends ComponentType  {
         Objects.equals(this.variableName, question.variableName) &&
         Objects.equals(this.answerType, question.answerType) &&
         Objects.equals(this.mandatory, question.mandatory) &&
-        Objects.equals(this.hidden, question.hidden) &&
-        super.equals(o);
+        Objects.equals(this.hidden, question.hidden);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prompt, description, variableName, answerType, mandatory, hidden, super.hashCode());
+    return Objects.hash(prompt, description, variableName, answerType, mandatory, hidden);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Question {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    
     sb.append("    prompt: ").append(toIndentedString(prompt)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    variableName: ").append(toIndentedString(variableName)).append("\n");

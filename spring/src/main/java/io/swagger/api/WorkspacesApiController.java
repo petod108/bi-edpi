@@ -2,7 +2,8 @@ package io.swagger.api;
 
 import io.swagger.model.ComponentInstance;
 import io.swagger.model.ComponentInstanceMetadataSurvey;
-import io.swagger.model.Error;
+import io.swagger.model.EnvironmentNameList;
+import io.swagger.model.ModelError;
 import io.swagger.model.ProductSurvey;
 import java.util.UUID;
 import io.swagger.model.Workspace;
@@ -26,7 +27,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
 @Controller
 public class WorkspacesApiController implements WorkspacesApi {
@@ -95,7 +96,7 @@ public class WorkspacesApiController implements WorkspacesApi {
         return new ResponseEntity<List<ComponentInstance>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> submitWorkspace(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody  ) {
+    public ResponseEntity<Void> submitWorkspace(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody EnvironmentNameList ) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
@@ -128,7 +129,7 @@ public class WorkspacesApiController implements WorkspacesApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<ComponentInstanceMetadataSurvey>(objectMapper.readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : \"DEV\",    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  }, {    \"environment\" : \"DEV\",    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<ComponentInstanceMetadataSurvey>(objectMapper.readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : \"DEV\",    \"metadata\" : [ {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    }, {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    } ],    \"surveyList\" : [ {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    }, {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    } ],    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  }, {    \"environment\" : \"DEV\",    \"metadata\" : [ {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    }, {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    } ],    \"surveyList\" : [ {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    }, {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    } ],    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<ComponentInstanceMetadataSurvey>(HttpStatus.INTERNAL_SERVER_ERROR);

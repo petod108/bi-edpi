@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  * Workspace
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
 public class Workspace extends WorkspaceBasic  {
   @JsonProperty("groups")

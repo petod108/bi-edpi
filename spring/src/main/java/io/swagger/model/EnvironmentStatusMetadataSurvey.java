@@ -9,6 +9,8 @@ import io.swagger.model.EnvironmentName;
 import io.swagger.model.EnvironmentStatus;
 import io.swagger.model.Metadata;
 import io.swagger.model.Survey;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,7 +19,7 @@ import javax.validation.constraints.*;
  * EnvironmentStatusMetadataSurvey
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
 public class EnvironmentStatusMetadataSurvey   {
   @JsonProperty("environment")
@@ -27,10 +29,12 @@ public class EnvironmentStatusMetadataSurvey   {
   private EnvironmentStatus status = null;
 
   @JsonProperty("metadata")
-  private Metadata metadata = null;
+  @Valid
+  private List<Metadata> metadata = null;
 
-  @JsonProperty("survey")
-  private Survey survey = null;
+  @JsonProperty("surveyList")
+  @Valid
+  private List<Survey> surveyList = null;
 
   public EnvironmentStatusMetadataSurvey environment(EnvironmentName environment) {
     this.environment = environment;
@@ -74,8 +78,16 @@ public class EnvironmentStatusMetadataSurvey   {
     this.status = status;
   }
 
-  public EnvironmentStatusMetadataSurvey metadata(Metadata metadata) {
+  public EnvironmentStatusMetadataSurvey metadata(List<Metadata> metadata) {
     this.metadata = metadata;
+    return this;
+  }
+
+  public EnvironmentStatusMetadataSurvey addMetadataItem(Metadata metadataItem) {
+    if (this.metadata == null) {
+      this.metadata = new ArrayList<Metadata>();
+    }
+    this.metadata.add(metadataItem);
     return this;
   }
 
@@ -87,33 +99,41 @@ public class EnvironmentStatusMetadataSurvey   {
 
   @Valid
 
-  public Metadata getMetadata() {
+  public List<Metadata> getMetadata() {
     return metadata;
   }
 
-  public void setMetadata(Metadata metadata) {
+  public void setMetadata(List<Metadata> metadata) {
     this.metadata = metadata;
   }
 
-  public EnvironmentStatusMetadataSurvey survey(Survey survey) {
-    this.survey = survey;
+  public EnvironmentStatusMetadataSurvey surveyList(List<Survey> surveyList) {
+    this.surveyList = surveyList;
+    return this;
+  }
+
+  public EnvironmentStatusMetadataSurvey addSurveyListItem(Survey surveyListItem) {
+    if (this.surveyList == null) {
+      this.surveyList = new ArrayList<Survey>();
+    }
+    this.surveyList.add(surveyListItem);
     return this;
   }
 
   /**
-   * Get survey
-   * @return survey
+   * Get surveyList
+   * @return surveyList
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public Survey getSurvey() {
-    return survey;
+  public List<Survey> getSurveyList() {
+    return surveyList;
   }
 
-  public void setSurvey(Survey survey) {
-    this.survey = survey;
+  public void setSurveyList(List<Survey> surveyList) {
+    this.surveyList = surveyList;
   }
 
 
@@ -129,12 +149,12 @@ public class EnvironmentStatusMetadataSurvey   {
     return Objects.equals(this.environment, environmentStatusMetadataSurvey.environment) &&
         Objects.equals(this.status, environmentStatusMetadataSurvey.status) &&
         Objects.equals(this.metadata, environmentStatusMetadataSurvey.metadata) &&
-        Objects.equals(this.survey, environmentStatusMetadataSurvey.survey);
+        Objects.equals(this.surveyList, environmentStatusMetadataSurvey.surveyList);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(environment, status, metadata, survey);
+    return Objects.hash(environment, status, metadata, surveyList);
   }
 
   @Override
@@ -145,7 +165,7 @@ public class EnvironmentStatusMetadataSurvey   {
     sb.append("    environment: ").append(toIndentedString(environment)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
-    sb.append("    survey: ").append(toIndentedString(survey)).append("\n");
+    sb.append("    surveyList: ").append(toIndentedString(surveyList)).append("\n");
     sb.append("}");
     return sb.toString();
   }

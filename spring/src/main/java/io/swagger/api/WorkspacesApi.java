@@ -7,7 +7,8 @@ package io.swagger.api;
 
 import io.swagger.model.ComponentInstance;
 import io.swagger.model.ComponentInstanceMetadataSurvey;
-import io.swagger.model.Error;
+import io.swagger.model.EnvironmentNameList;
+import io.swagger.model.ModelError;
 import io.swagger.model.ProductSurvey;
 import java.util.UUID;
 import io.swagger.model.Workspace;
@@ -27,20 +28,20 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
 @Api(value = "workspaces", description = "the workspaces API")
-@RequestMapping(value = "")
+@RequestMapping(value = "/bi-edpi/component-inventory_api/1.0.0")
 public interface WorkspacesApi {
 
     @ApiOperation(value = "Add product to workspace", nickname = "addProduct", notes = "As user, I want to add a new Product to the workspace", response = Object.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "ID of created Component", response = Object.class),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}/components",
         produces = { "application/json" }, 
         consumes = { "application/json" },
@@ -66,11 +67,11 @@ public interface WorkspacesApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "returning ID", response = Object.class),
         @ApiResponse(code = 204, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces",
         consumes = { "application/json" },
         method = RequestMethod.POST)
@@ -94,11 +95,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "Delete component of workspace", nickname = "deleteComponent", notes = "As user, I want to delete component of workspace", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 202, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}/components/{componentId}",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
@@ -114,11 +115,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "Delete a workspace", nickname = "deleteWorkspace", notes = "As user, I want to delete a workspace", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 204, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}",
         method = RequestMethod.DELETE)
     default ResponseEntity<Void> deleteWorkspace(@ApiParam(value = "ID of workspace that needs to be deleted",required=true) @PathVariable("workspaceId") UUID workspaceId) {
@@ -133,11 +134,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "As user, I want to see components in the workspace", nickname = "getComponentList", notes = "As user, I want to see components in the workspace", response = ComponentInstance.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria. Array of components with their status", response = ComponentInstance.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}/components",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
@@ -161,15 +162,15 @@ public interface WorkspacesApi {
     @ApiOperation(value = "Submit for approving the workspace", nickname = "submitWorkspace", notes = "As user, I want to submit the workspace", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 204, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}",
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Void> submitWorkspace(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody  ) {
+    default ResponseEntity<Void> submitWorkspace(@ApiParam(value = "ID of workspace",required=true) @PathVariable("workspaceId") UUID workspaceId,@ApiParam(value = "Array of environments where user want to instantiate workspace"  )  @Valid @RequestBody EnvironmentNameList ) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default WorkspacesApi interface so no example is generated");
@@ -181,11 +182,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "Update a running components inside of all workspace's environments", nickname = "updateComponentInAllEnvironmentsOfWorkspace", notes = "As user, I want to update components of all workspace's environments", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 205, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}/components",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
@@ -201,11 +202,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "Update a existing workspace", nickname = "updateWorkspace", notes = "As user, I want to update a workspace", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 205, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces",
         produces = { "application/json" }, 
         consumes = { "application/json" },
@@ -222,11 +223,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "As user, I want to see my workspaces", nickname = "workspacesGet", notes = "As user, I want to see my workspaces", response = WorkspaceBasic.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria", response = WorkspaceBasic.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
@@ -250,11 +251,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "As user, I want to see component of workspace", nickname = "workspacesWorkspaceIdComponentsComponentIdGet", notes = "As user, I want to see component of workspace", response = ComponentInstanceMetadataSurvey.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria", response = ComponentInstanceMetadataSurvey.class),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}/components/{componentId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
@@ -262,7 +263,7 @@ public interface WorkspacesApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : \"DEV\",    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  }, {    \"environment\" : \"DEV\",    \"metadata\" : \"\",    \"survey\" : \"\",    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"name\",  \"EnvironmentStatusMetadataSurveys\" : [ {    \"environment\" : \"DEV\",    \"metadata\" : [ {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    }, {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    } ],    \"surveyList\" : [ {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    }, {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    } ],    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  }, {    \"environment\" : \"DEV\",    \"metadata\" : [ {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    }, {      \"value\" : \"Metadata value\",      \"key\" : \"Metadata key\"    } ],    \"surveyList\" : [ {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    }, {      \"questionVarName\" : \"Which paths you want to select?\",      \"AnswerList\" : [ \"Option1\", \"Option1\" ]    } ],    \"status\" : {      \"environmentName\" : \"DEV\",      \"status\" : \"READY\"    }  } ],  \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"}", ComponentInstanceMetadataSurvey.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -278,11 +279,11 @@ public interface WorkspacesApi {
     @ApiOperation(value = "As user, I want to see details of my workspace", nickname = "workspacesWorkspaceIdGet", notes = "As user, I want to see all information for my workspace", response = Workspace.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation is getting detail of the workspace", response = Workspace.class),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/workspaces/{workspaceId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)

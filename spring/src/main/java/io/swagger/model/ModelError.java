@@ -1,20 +1,17 @@
 package io.swagger.model;
 
 import java.util.Objects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.model.Product;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Product with his Survey
+ * ModelError
  */
-@ApiModel(description = "Product with his Survey")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
-public class ProductSurvey extends Product  {
+public class ModelError   {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -29,14 +26,14 @@ public class ProductSurvey extends Product  {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash();
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ProductSurvey {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("class ModelError {\n");
+    
     sb.append("}");
     return sb.toString();
   }

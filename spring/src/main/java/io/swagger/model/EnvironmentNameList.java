@@ -1,20 +1,20 @@
 package io.swagger.model;
 
 import java.util.Objects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.model.Product;
+import io.swagger.model.EnvironmentName;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Product with his Survey
+ * EnvironmentNameList
  */
-@ApiModel(description = "Product with his Survey")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
-public class ProductSurvey extends Product  {
+public class EnvironmentNameList extends ArrayList<EnvironmentName>  {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -35,7 +35,7 @@ public class ProductSurvey extends Product  {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ProductSurvey {\n");
+    sb.append("class EnvironmentNameList {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("}");
     return sb.toString();

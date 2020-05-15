@@ -5,7 +5,7 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.Error;
+import io.swagger.model.ModelError;
 import io.swagger.model.Product;
 import io.swagger.model.ProductDefinition;
 import java.util.UUID;
@@ -24,20 +24,20 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T10:45:56.888Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-15T17:21:26.661Z")
 
 @Api(value = "products", description = "the products API")
-@RequestMapping(value = "")
+@RequestMapping(value = "/bi-edpi/component-inventory_api/1.0.0")
 public interface ProductsApi {
 
     @ApiOperation(value = "show list of all products", nickname = "productsGet", notes = "As user, I want to see the list of all products", response = Product.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria", response = Product.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/products",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
@@ -61,11 +61,11 @@ public interface ProductsApi {
     @ApiOperation(value = "As user, I want to create product", nickname = "productsPost", notes = "As user, I want to create product", response = Object.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "ID of new product", response = Object.class),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/products",
         produces = { "application/json" }, 
         consumes = { "application/json" },
@@ -90,11 +90,11 @@ public interface ProductsApi {
     @ApiOperation(value = "As user, I want to delete one product from the catalog", nickname = "productsProductIdDelete", notes = "As user, I want to delete one product from the catalog", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 205, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/products/{productId}",
         method = RequestMethod.DELETE)
     default ResponseEntity<Void> productsProductIdDelete(@ApiParam(value = "",required=true) @PathVariable("productId") UUID productId) {
@@ -109,11 +109,11 @@ public interface ProductsApi {
     @ApiOperation(value = "As user, I want to see detail of one product", nickname = "productsProductIdGet", notes = "As user, I want to see detail of one product", response = ProductDefinition.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria", response = ProductDefinition.class),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/products/{productId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
@@ -137,11 +137,11 @@ public interface ProductsApi {
     @ApiOperation(value = "As user, I want to update the product", nickname = "productsPut", notes = "As user, I want to update the product", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 205, message = "OK"),
-        @ApiResponse(code = 400, message = "", response = Error.class),
-        @ApiResponse(code = 401, message = "", response = Error.class),
-        @ApiResponse(code = 403, message = "", response = Error.class),
-        @ApiResponse(code = 404, message = "", response = Error.class),
-        @ApiResponse(code = 500, message = "", response = Error.class) })
+        @ApiResponse(code = 400, message = "", response = ModelError.class),
+        @ApiResponse(code = 401, message = "", response = ModelError.class),
+        @ApiResponse(code = 403, message = "", response = ModelError.class),
+        @ApiResponse(code = 404, message = "", response = ModelError.class),
+        @ApiResponse(code = 500, message = "", response = ModelError.class) })
     @RequestMapping(value = "/products",
         produces = { "application/json" }, 
         consumes = { "application/json" },
