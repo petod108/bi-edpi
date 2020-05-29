@@ -708,77 +708,6 @@
           "application/json" : {
             "schema" : {
               "$ref" : "#/components/schemas/ComponentInstanceDetailResponse"
-            },
-            "example" : {
-              "id" : "6d5e2d66-d6ae-44be-8369-69435f709a72",
-              "name" : "The Sun Also Rises",
-              "componentInstances" : [ {
-                "id" : "9804795e-c138-4d0f-a4ed-d568570b67a4",
-                "environment" : "PROD",
-                "status" : "READY",
-                "metaDatas" : [ {
-                  "key" : "color",
-                  "value" : "yellow"
-                }, {
-                  "key" : "url",
-                  "value" : "http://mybi"
-                }, {
-                  "key" : "background",
-                  "value" : "red"
-                } ],
-                "answers" : [ {
-                  "variable" : "serverMemorySize",
-                  "value" : [ "100000" ]
-                }, {
-                  "variable" : "cpuFrequency",
-                  "value" : [ "1.1", "6" ]
-                }, {
-                  "variable" : "cpuCount",
-                  "value" : [ "9" ]
-                } ]
-              }, {
-                "id" : "44d9f91d-02fb-4d41-a81a-68d1f7195c9f",
-                "environment" : "DEV",
-                "status" : "FAILED",
-                "metaDatas" : [ {
-                  "key" : "color",
-                  "value" : "red"
-                }, {
-                  "key" : "url",
-                  "value" : "http://google"
-                }, {
-                  "key" : "background",
-                  "value" : "green"
-                } ],
-                "answers" : [ {
-                  "variable" : "serverMemorySize",
-                  "value" : [ "10000000", "50000000" ]
-                }, {
-                  "variable" : "graphicCardMemory",
-                  "value" : [ "10000000", "50000000" ]
-                }, {
-                  "variable" : "usingScanner",
-                  "value" : [ "true" ]
-                } ]
-              }, {
-                "id" : "a24eba0b-cb78-41c9-bc02-e8dcd97a4884",
-                "environment" : "QA",
-                "status" : "READY",
-                "metaDatas" : [ {
-                  "key" : "size",
-                  "value" : "20"
-                }, {
-                  "key" : "background",
-                  "value" : "red"
-                } ],
-                "answers" : [ {
-                  "variable" : "timeInterval",
-                  "value" : [ "5", "120" ]
-                }, {
-                  "variable" : "length",
-                  "value" : [ "120", "250" ]
-                } ]
-              } ]
             }
           }
         }
@@ -970,6 +899,12 @@
             "metaDatas" : [ {
               "key" : "color",
               "value" : "yellow"
+            }, {
+              "key" : "url",
+              "value" : "http://mybi"
+            }, {
+              "key" : "background",
+              "value" : "red"
             } ],
             "answers" : [ {
               "variable" : "serverMemorySize",
@@ -988,6 +923,12 @@
             "metaDatas" : [ {
               "key" : "color",
               "value" : "red"
+            }, {
+              "key" : "url",
+              "value" : "http://google"
+            }, {
+              "key" : "background",
+              "value" : "green"
             } ],
             "answers" : [ {
               "variable" : "serverMemorySize",
@@ -1006,6 +947,9 @@
             "metaDatas" : [ {
               "key" : "size",
               "value" : "20"
+            }, {
+              "key" : "background",
+              "value" : "red"
             } ],
             "answers" : [ {
               "variable" : "timeInterval",
