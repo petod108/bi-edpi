@@ -2,7 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "description" : "This is a simple API",
-    "version" : "1.0.0-oas3",
+    "version" : "1.0.1-oas3",
     "title" : "Component Inventory API",
     "contact" : {
       "email" : "you@boehringer-ingelheim.com"
@@ -25,6 +25,7 @@
         "tags" : [ ],
         "summary" : "As user, I want to see my workspaces",
         "description" : "As user, I want to see my workspaces",
+        "operationId" : "getWorkspaces",
         "responses" : {
           "200" : {
             "description" : "search results matching criteria",
@@ -33,8 +34,33 @@
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/WorkspaceBasic"
-                  }
+                    "$ref" : "#/components/schemas/WorkspaceHeaderResponse"
+                  },
+                  "example" : [ {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+                    "name" : "RStudio"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0852",
+                    "name" : "RStudio1"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0853",
+                    "name" : "RStudio2"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0854",
+                    "name" : "RStudio3"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0855",
+                    "name" : "RStudio4"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0856",
+                    "name" : "RStudio5"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0857",
+                    "name" : "RStudio6"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0858",
+                    "name" : "Informatica"
+                  } ]
                 }
               }
             }
@@ -54,92 +80,6 @@
           "500" : {
             "$ref" : "#/components/responses/ServerError"
           }
-        }
-      },
-      "post" : {
-        "tags" : [ ],
-        "summary" : "Create the workspace",
-        "description" : "As user, I want to create workspace",
-        "operationId" : "createWorkspace",
-        "responses" : {
-          "200" : {
-            "description" : "returning ID",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "type" : "integer"
-                  }
-                }
-              }
-            }
-          },
-          "204" : {
-            "$ref" : "#/components/responses/SuccessNoContent"
-          },
-          "400" : {
-            "$ref" : "#/components/responses/BadRequest"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/Unauthorized"
-          },
-          "403" : {
-            "$ref" : "#/components/responses/Forbidden"
-          },
-          "404" : {
-            "$ref" : "#/components/responses/NotFound"
-          },
-          "500" : {
-            "$ref" : "#/components/responses/ServerError"
-          }
-        },
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Workspace"
-              }
-            }
-          },
-          "description" : "Array of environments where user want to instantiate workspace"
-        }
-      },
-      "put" : {
-        "tags" : [ ],
-        "summary" : "Update a existing workspace",
-        "description" : "As user, I want to update a workspace",
-        "operationId" : "updateWorkspace",
-        "responses" : {
-          "205" : {
-            "$ref" : "#/components/responses/ResetContent"
-          },
-          "400" : {
-            "$ref" : "#/components/responses/BadRequest"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/Unauthorized"
-          },
-          "403" : {
-            "$ref" : "#/components/responses/Forbidden"
-          },
-          "404" : {
-            "$ref" : "#/components/responses/NotFound"
-          },
-          "500" : {
-            "$ref" : "#/components/responses/ServerError"
-          }
-        },
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Workspace"
-              }
-            }
-          },
-          "description" : "workspace",
-          "required" : true
         }
       }
     },
@@ -148,6 +88,7 @@
         "tags" : [ ],
         "summary" : "As user, I want to see details of my workspace",
         "description" : "As user, I want to see all information for my workspace",
+        "operationId" : "getWorkspace",
         "parameters" : [ {
           "name" : "workspaceId",
           "in" : "path",
@@ -155,7 +96,8 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         } ],
         "responses" : {
@@ -164,92 +106,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Workspace"
+                  "$ref" : "#/components/schemas/WorkspaceDetailResponse"
                 }
               }
             }
-          },
-          "400" : {
-            "$ref" : "#/components/responses/BadRequest"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/Unauthorized"
-          },
-          "403" : {
-            "$ref" : "#/components/responses/Forbidden"
-          },
-          "404" : {
-            "$ref" : "#/components/responses/NotFound"
-          },
-          "500" : {
-            "$ref" : "#/components/responses/ServerError"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ ],
-        "summary" : "Submit for approving the workspace",
-        "description" : "As user, I want to submit the workspace",
-        "operationId" : "submitWorkspace",
-        "parameters" : [ {
-          "name" : "workspaceId",
-          "in" : "path",
-          "description" : "ID of workspace",
-          "required" : true,
-          "schema" : {
-            "type" : "string",
-            "format" : "uuid"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "$ref" : "#/components/responses/SuccessNoContent"
-          },
-          "400" : {
-            "$ref" : "#/components/responses/BadRequest"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/Unauthorized"
-          },
-          "403" : {
-            "$ref" : "#/components/responses/Forbidden"
-          },
-          "404" : {
-            "$ref" : "#/components/responses/NotFound"
-          },
-          "500" : {
-            "$ref" : "#/components/responses/ServerError"
-          }
-        },
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/EnvironmentNameList"
-              }
-            }
-          },
-          "description" : "Array of environments where user want to instantiate workspace"
-        }
-      },
-      "delete" : {
-        "tags" : [ ],
-        "summary" : "Delete a workspace",
-        "description" : "As user, I want to delete a workspace",
-        "operationId" : "deleteWorkspace",
-        "parameters" : [ {
-          "name" : "workspaceId",
-          "in" : "path",
-          "description" : "ID of workspace that needs to be deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "string",
-            "format" : "uuid"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "$ref" : "#/components/responses/SuccessNoContent"
           },
           "400" : {
             "$ref" : "#/components/responses/BadRequest"
@@ -281,7 +141,8 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         } ],
         "responses" : {
@@ -290,10 +151,59 @@
             "content" : {
               "application/json" : {
                 "schema" : {
+                  "description" : "Array of Component instances",
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/ComponentInstance"
-                  }
+                    "$ref" : "#/components/schemas/ComponentInstanceHeaderResponse"
+                  },
+                  "example" : [ {
+                    "id" : "09cca60c-c62b-4b8d-9a30-23ec8522374c",
+                    "name" : "The Heart Is a Lonely Hunter",
+                    "environments" : [ {
+                      "environment" : "QA",
+                      "status" : "FAILED"
+                    }, {
+                      "environment" : "PROD",
+                      "status" : "FAILED"
+                    }, {
+                      "environment" : "DEV",
+                      "status" : "FAILED"
+                    } ]
+                  }, {
+                    "id" : "64cd947a-ad3c-483c-ac65-ca849218c9f4",
+                    "name" : "A Farewell to Arms",
+                    "environments" : [ {
+                      "environment" : "DEV",
+                      "status" : "FAILED"
+                    } ]
+                  }, {
+                    "id" : "4be9ef8a-8433-4f1e-9d8a-c4c702263870",
+                    "name" : "Look Homeward, Angel",
+                    "environments" : [ {
+                      "environment" : "QA",
+                      "status" : "READY"
+                    }, {
+                      "environment" : "DEV",
+                      "status" : "READY"
+                    }, {
+                      "environment" : "PROD",
+                      "status" : "RUNNING"
+                    } ]
+                  }, {
+                    "id" : "5e1c529e-1042-4c60-8253-ce08770615c2",
+                    "name" : "Nine Coaches Waiting",
+                    "environments" : [ {
+                      "environment" : "QA",
+                      "status" : "RUNNING"
+                    } ]
+                  }, {
+                    "id" : "8560638f-e01d-48d2-846b-fbaa3e5d1864",
+                    "name" : "In a Glass Darkly",
+                    "environments" : [ {
+                      "environment" : "QA",
+                      "status" : "FAILED"
+                    } ]
+                  } ]
                 }
               }
             }
@@ -317,32 +227,33 @@
       },
       "post" : {
         "tags" : [ ],
-        "summary" : "Add product to workspace",
-        "description" : "As user, I want to add a new Product to the workspace",
-        "operationId" : "addProduct",
+        "summary" : "Add component to workspace",
+        "description" : "As user, I want to add a new Component to the workspace",
+        "operationId" : "addComponent",
         "parameters" : [ {
           "in" : "path",
           "required" : true,
           "name" : "workspaceId",
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         } ],
+        "requestBody" : {
+          "description" : "Component definition",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddComponentRequest"
+              }
+            }
+          }
+        },
         "responses" : {
           "200" : {
-            "description" : "ID of created Component",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "type" : "string",
-                    "format" : "uuid"
-                  }
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ComponentInstanceDetailRespond"
           },
           "400" : {
             "$ref" : "#/components/responses/BadRequest"
@@ -359,70 +270,13 @@
           "500" : {
             "$ref" : "#/components/responses/ServerError"
           }
-        },
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/ProductSurvey"
-              }
-            }
-          },
-          "description" : "Product definition",
-          "required" : true
-        }
-      },
-      "put" : {
-        "tags" : [ ],
-        "summary" : "Update a running components inside of all workspace's environments",
-        "description" : "As user, I want to update components of all workspace's environments",
-        "operationId" : "updateComponentInAllEnvironmentsOfWorkspace",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "workspaceId",
-          "description" : "ID of workspace",
-          "required" : true,
-          "schema" : {
-            "type" : "string",
-            "format" : "uuid"
-          }
-        } ],
-        "responses" : {
-          "205" : {
-            "$ref" : "#/components/responses/ResetContent"
-          },
-          "400" : {
-            "$ref" : "#/components/responses/BadRequest"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/Unauthorized"
-          },
-          "403" : {
-            "$ref" : "#/components/responses/Forbidden"
-          },
-          "404" : {
-            "$ref" : "#/components/responses/NotFound"
-          },
-          "500" : {
-            "$ref" : "#/components/responses/ServerError"
-          }
-        },
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/ComponentInstanceMetadataSurvey"
-              }
-            }
-          },
-          "description" : "component",
-          "required" : true
         }
       }
     },
     "/workspaces/{workspaceId}/components/{componentId}" : {
       "get" : {
         "tags" : [ ],
+        "operationId" : "getComponentInstance",
         "summary" : "As user, I want to see component of workspace",
         "description" : "As user, I want to see component of workspace",
         "parameters" : [ {
@@ -431,7 +285,8 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         }, {
           "in" : "path",
@@ -439,19 +294,71 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ef-6c54-4b01-90e6-d701748f0851"
           }
         } ],
         "responses" : {
           "200" : {
-            "description" : "search results matching criteria",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ComponentInstanceMetadataSurvey"
-                }
+            "$ref" : "#/components/responses/ComponentInstanceDetailRespond"
+          },
+          "400" : {
+            "$ref" : "#/components/responses/BadRequest"
+          },
+          "401" : {
+            "$ref" : "#/components/responses/Unauthorized"
+          },
+          "403" : {
+            "$ref" : "#/components/responses/Forbidden"
+          },
+          "404" : {
+            "$ref" : "#/components/responses/NotFound"
+          },
+          "500" : {
+            "$ref" : "#/components/responses/ServerError"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ ],
+        "summary" : "Update a running component inside of all workspace's environments",
+        "description" : "As user, I want to update components of all workspace's environments",
+        "operationId" : "updateComponent",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "workspaceId",
+          "description" : "ID of workspace",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          }
+        }, {
+          "in" : "path",
+          "name" : "componentId",
+          "description" : "ID of component",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "component",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateComponentInstanceRequest"
               }
             }
+          }
+        },
+        "responses" : {
+          "205" : {
+            "$ref" : "#/components/responses/ResetContent"
           },
           "400" : {
             "$ref" : "#/components/responses/BadRequest"
@@ -482,7 +389,8 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         }, {
           "name" : "componentId",
@@ -491,7 +399,8 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         } ],
         "responses" : {
@@ -520,6 +429,7 @@
       "get" : {
         "summary" : "show list of all products",
         "description" : "As user, I want to see the list of all products",
+        "operationId" : "getProducts",
         "responses" : {
           "200" : {
             "description" : "search results matching criteria",
@@ -528,8 +438,39 @@
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/Product"
-                  }
+                    "$ref" : "#/components/schemas/ProductResponse"
+                  },
+                  "example" : [ {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+                    "name" : "RStudio",
+                    "description" : "Lorem Ipsum the fifth is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys",
+                    "image" : "https://jupyter.org/assets/nav_logo.svg",
+                    "location" : "EU"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0852",
+                    "name" : "RStudio1",
+                    "description" : "Lorem Ipsum the fifth is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys",
+                    "image" : "https://jupyter.org/assets/nav_logo.svg",
+                    "location" : "EU"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0853",
+                    "name" : "RStudio2",
+                    "description" : "Lorem Ipsum the fifth is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys",
+                    "image" : "https://jupyter.org/assets/nav_logo.svg",
+                    "location" : "EU"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0854",
+                    "name" : "RStudio3",
+                    "description" : "Lorem Ipsum the fifth is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys",
+                    "image" : "https://jupyter.org/assets/nav_logo.svg",
+                    "location" : "EU"
+                  }, {
+                    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0855",
+                    "name" : "RStudio4",
+                    "description" : "Lorem Ipsum the fifth is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys",
+                    "image" : "https://jupyter.org/assets/nav_logo.svg",
+                    "location" : "EU"
+                  } ]
                 }
               }
             }
@@ -554,17 +495,17 @@
       "post" : {
         "summary" : "As user, I want to create product",
         "description" : "As user, I want to create product",
+        "operationId" : "createProduct",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ProductRequestAddUpdate"
+        },
         "responses" : {
           "200" : {
-            "description" : "ID of new product",
+            "description" : "new product",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "type" : "string",
-                    "format" : "uuid"
-                  }
+                  "$ref" : "#/components/schemas/ProductResponse"
                 }
               }
             }
@@ -584,36 +525,6 @@
           "500" : {
             "$ref" : "#/components/responses/ServerError"
           }
-        },
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/ProductDefinition"
-        }
-      },
-      "put" : {
-        "summary" : "As user, I want to update the product",
-        "description" : "As user, I want to update the product",
-        "responses" : {
-          "205" : {
-            "$ref" : "#/components/responses/ResetContent"
-          },
-          "400" : {
-            "$ref" : "#/components/responses/BadRequest"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/Unauthorized"
-          },
-          "403" : {
-            "$ref" : "#/components/responses/Forbidden"
-          },
-          "404" : {
-            "$ref" : "#/components/responses/NotFound"
-          },
-          "500" : {
-            "$ref" : "#/components/responses/ServerError"
-          }
-        },
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/ProductDefinition"
         }
       }
     },
@@ -621,13 +532,15 @@
       "get" : {
         "summary" : "As user, I want to see detail of one product",
         "description" : "As user, I want to see detail of one product",
+        "operationId" : "getProductDetail",
         "parameters" : [ {
           "in" : "path",
           "name" : "productId",
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         } ],
         "responses" : {
@@ -636,10 +549,48 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ProductDefinition"
+                  "$ref" : "#/components/schemas/ProductResponse"
                 }
               }
             }
+          },
+          "400" : {
+            "$ref" : "#/components/responses/BadRequest"
+          },
+          "401" : {
+            "$ref" : "#/components/responses/Unauthorized"
+          },
+          "403" : {
+            "$ref" : "#/components/responses/Forbidden"
+          },
+          "404" : {
+            "$ref" : "#/components/responses/NotFound"
+          },
+          "500" : {
+            "$ref" : "#/components/responses/ServerError"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "As user, I want to update the product",
+        "description" : "As user, I want to update the product",
+        "operationId" : "updateProductDetail",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "productId",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          }
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ProductRequestAddUpdate"
+        },
+        "responses" : {
+          "205" : {
+            "$ref" : "#/components/responses/ResetContent"
           },
           "400" : {
             "$ref" : "#/components/responses/BadRequest"
@@ -661,13 +612,15 @@
       "delete" : {
         "summary" : "As user, I want to delete one product from the catalog",
         "description" : "As user, I want to delete one product from the catalog",
+        "operationId" : "deleteProduct",
         "parameters" : [ {
           "in" : "path",
           "name" : "productId",
           "required" : true,
           "schema" : {
             "type" : "string",
-            "format" : "uuid"
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           }
         } ],
         "responses" : {
@@ -691,21 +644,151 @@
           }
         }
       }
+    },
+    "/products1" : {
+      "get" : {
+        "summary" : "show list of all products",
+        "description" : "As user, I want to see the list of all products",
+        "operationId" : "getProducts1",
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProductRequest"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "$ref" : "#/components/responses/BadRequest"
+          },
+          "401" : {
+            "$ref" : "#/components/responses/Unauthorized"
+          },
+          "403" : {
+            "$ref" : "#/components/responses/Forbidden"
+          },
+          "404" : {
+            "$ref" : "#/components/responses/NotFound"
+          },
+          "500" : {
+            "$ref" : "#/components/responses/ServerError"
+          }
+        }
+      }
     }
   },
   "servers" : [ {
-    "url" : "http://virtserver.swaggerhub.com/bi-edpi/component-inventory_api/1.0.0-oas3"
+    "url" : "http://virtserver.swaggerhub.com/bi-edpi/component-inventory_api/1.0.1-oas3"
   }, {
-    "url" : "https://virtserver.swaggerhub.com/bi-edpi/component-inventory_api/1.0.0-oas3"
+    "url" : "https://virtserver.swaggerhub.com/bi-edpi/component-inventory_api/1.0.1-oas3"
   } ],
   "components" : {
+    "requestBodies" : {
+      "ProductRequestAddUpdate" : {
+        "required" : true,
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/ProductRequest"
+            }
+          }
+        }
+      }
+    },
     "responses" : {
+      "ComponentInstanceDetailRespond" : {
+        "description" : "",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/ComponentInstanceDetailResponse"
+            },
+            "example" : {
+              "id" : "6d5e2d66-d6ae-44be-8369-69435f709a72",
+              "name" : "The Sun Also Rises",
+              "componentInstances" : [ {
+                "id" : "9804795e-c138-4d0f-a4ed-d568570b67a4",
+                "environment" : "PROD",
+                "status" : "READY",
+                "metaDatas" : [ {
+                  "key" : "color",
+                  "value" : "yellow"
+                }, {
+                  "key" : "url",
+                  "value" : "http://mybi"
+                }, {
+                  "key" : "background",
+                  "value" : "red"
+                } ],
+                "answers" : [ {
+                  "variable" : "serverMemorySize",
+                  "value" : [ "100000" ]
+                }, {
+                  "variable" : "cpuFrequency",
+                  "value" : [ "1.1", "6" ]
+                }, {
+                  "variable" : "cpuCount",
+                  "value" : [ "9" ]
+                } ]
+              }, {
+                "id" : "44d9f91d-02fb-4d41-a81a-68d1f7195c9f",
+                "environment" : "DEV",
+                "status" : "FAILED",
+                "metaDatas" : [ {
+                  "key" : "color",
+                  "value" : "red"
+                }, {
+                  "key" : "url",
+                  "value" : "http://google"
+                }, {
+                  "key" : "background",
+                  "value" : "green"
+                } ],
+                "answers" : [ {
+                  "variable" : "serverMemorySize",
+                  "value" : [ "10000000", "50000000" ]
+                }, {
+                  "variable" : "graphicCardMemory",
+                  "value" : [ "10000000", "50000000" ]
+                }, {
+                  "variable" : "usingScanner",
+                  "value" : [ "true" ]
+                } ]
+              }, {
+                "id" : "a24eba0b-cb78-41c9-bc02-e8dcd97a4884",
+                "environment" : "QA",
+                "status" : "READY",
+                "metaDatas" : [ {
+                  "key" : "size",
+                  "value" : "20"
+                }, {
+                  "key" : "background",
+                  "value" : "red"
+                } ],
+                "answers" : [ {
+                  "variable" : "timeInterval",
+                  "value" : [ "5", "120" ]
+                }, {
+                  "variable" : "length",
+                  "value" : [ "120", "250" ]
+                } ]
+              } ]
+            }
+          }
+        }
+      },
       "NotFound" : {
         "description" : "",
         "content" : {
           "*/*" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ModelError"
+              "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -715,7 +798,7 @@
         "content" : {
           "*/*" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ModelError"
+              "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -725,7 +808,7 @@
         "content" : {
           "*/*" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ModelError"
+              "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -735,7 +818,7 @@
         "content" : {
           "*/*" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ModelError"
+              "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -745,35 +828,219 @@
         "content" : {
           "*/*" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ModelError"
+              "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
         }
-      },
-      "SuccessNoContent" : {
-        "description" : "OK"
       },
       "ResetContent" : {
         "description" : "OK"
       }
     },
-    "requestBodies" : {
-      "ProductDefinition" : {
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/ProductDefinition"
-            }
-          }
-        },
-        "required" : true
-      }
-    },
     "schemas" : {
-      "WorkspaceBasic" : {
+      "WorkspaceHeaderResponse" : {
         "description" : "Limited information about workspace",
         "type" : "object",
         "required" : [ "id", "name" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "description" : "ID of workspace",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Workspace name",
+            "example" : "RStudio"
+          }
+        }
+      },
+      "WorkspaceDetailResponse" : {
+        "description" : "Workspace",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "description" : "ID of Workspace",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Workspace name",
+            "example" : "RStudio"
+          },
+          "groups" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "BI-LINUX", "BI-USER" ],
+            "description" : "Active directory"
+          },
+          "CI" : {
+            "type" : "string",
+            "example" : "BI-AS-DATALAKE",
+            "description" : "Configuration Item"
+          }
+        }
+      },
+      "AddComponentRequest" : {
+        "description" : "Product with his Survey",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "description" : "ID of Product",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of product",
+            "example" : "RStudio"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of RStudio",
+            "example" : "Description RStudio"
+          },
+          "image" : {
+            "type" : "string",
+            "description" : "Path to the image",
+            "example" : "/images/componentRStudio.gif"
+          },
+          "answers" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AnswerDTO"
+            }
+          }
+        }
+      },
+      "ComponentInstanceHeaderResponse" : {
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "description" : "ID of ComponentInstance",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "RStudio component"
+          },
+          "environments" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EnvironmentDTO"
+            }
+          }
+        }
+      },
+      "ComponentInstanceDetailResponse" : {
+        "description" : "Object defining ComponentInstance",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "description" : "ID of ComponentInstance inside of workspace",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name ComponentInstance inside of workspace",
+            "example" : "RStudio"
+          },
+          "componentInstances" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ComponentInstanceDTO"
+            }
+          }
+        },
+        "example" : {
+          "id" : "6d5e2d66-d6ae-44be-8369-69435f709a72",
+          "name" : "The Sun Also Rises",
+          "componentInstances" : [ {
+            "id" : "9804795e-c138-4d0f-a4ed-d568570b67a4",
+            "environment" : "PROD",
+            "status" : "READY",
+            "metaDatas" : [ {
+              "key" : "color",
+              "value" : "yellow"
+            } ],
+            "answers" : [ {
+              "variable" : "serverMemorySize",
+              "value" : [ "100000" ]
+            }, {
+              "variable" : "cpuFrequency",
+              "value" : [ "1.1", "6" ]
+            }, {
+              "variable" : "cpuCount",
+              "value" : [ "9" ]
+            } ]
+          }, {
+            "id" : "44d9f91d-02fb-4d41-a81a-68d1f7195c9f",
+            "environment" : "DEV",
+            "status" : "FAILED",
+            "metaDatas" : [ {
+              "key" : "color",
+              "value" : "red"
+            } ],
+            "answers" : [ {
+              "variable" : "serverMemorySize",
+              "value" : [ "10000000", "50000000" ]
+            }, {
+              "variable" : "graphicCardMemory",
+              "value" : [ "10000000", "50000000" ]
+            }, {
+              "variable" : "usingScanner",
+              "value" : [ "true" ]
+            } ]
+          }, {
+            "id" : "a24eba0b-cb78-41c9-bc02-e8dcd97a4884",
+            "environment" : "QA",
+            "status" : "READY",
+            "metaDatas" : [ {
+              "key" : "size",
+              "value" : "20"
+            } ],
+            "answers" : [ {
+              "variable" : "timeInterval",
+              "value" : [ "5", "120" ]
+            }, {
+              "variable" : "length",
+              "value" : [ "120", "250" ]
+            } ]
+          } ]
+        }
+      },
+      "UpdateComponentInstanceRequest" : {
+        "description" : "Object defining ComponentInstance",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "description" : "ID of ComponentInstance inside of workspace",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name ComponentInstance inside of workspace",
+            "example" : "RStudio"
+          },
+          "componentInstances" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ComponentInstanceDTO"
+            }
+          }
+        }
+      },
+      "ProductResponse" : {
+        "type" : "object",
         "properties" : {
           "id" : {
             "type" : "string",
@@ -782,220 +1049,204 @@
           },
           "name" : {
             "type" : "string",
-            "example" : "RStudio"
-          }
-        }
-      },
-      "Workspace" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/WorkspaceBasic"
-        }, {
-          "description" : "Workspace",
-          "type" : "object",
-          "properties" : {
-            "groups" : {
-              "type" : "array",
-              "items" : {
-                "type" : "string"
-              },
-              "example" : [ "BI-LINUX", "BI-USER" ],
-              "description" : "Active directory"
-            },
-            "CI" : {
-              "type" : "string",
-              "example" : "BI-AS-DATALAKE",
-              "description" : "Configuration Item"
-            }
-          }
-        } ]
-      },
-      "Survey" : {
-        "properties" : {
-          "questionVarName" : {
-            "type" : "string",
-            "description" : "Question name which could have more answers",
-            "example" : "Which paths you want to select?"
-          },
-          "AnswerList" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Answer"
-            }
-          }
-        }
-      },
-      "Status" : {
-        "type" : "string",
-        "enum" : [ "READY", "RUNNING", "FAILED" ],
-        "example" : "READY"
-      },
-      "EnvironmentNameList" : {
-        "description" : "List of environments",
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/EnvironmentName"
-        }
-      },
-      "EnvironmentName" : {
-        "type" : "string",
-        "enum" : [ "DEV", "QA", "PROD" ],
-        "example" : "DEV"
-      },
-      "EnvironmentStatus" : {
-        "properties" : {
-          "environmentName" : {
-            "$ref" : "#/components/schemas/EnvironmentName"
-          },
-          "status" : {
-            "$ref" : "#/components/schemas/Status"
-          }
-        }
-      },
-      "ProductSurvey" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/Product"
-        }, {
-          "description" : "Product with his Survey",
-          "type" : "object",
-          "properties" : {
-            "surveyList" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/components/schemas/Survey"
-              }
-            }
-          }
-        } ]
-      },
-      "ProductDefinition" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/Product"
-        }, {
-          "type" : "object",
-          "description" : "Product Definition",
-          "properties" : {
-            "QuestionList" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/components/schemas/Question"
-              }
-            }
-          }
-        } ]
-      },
-      "Product" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string",
-            "example" : "RSystem"
+            "example" : "RStudio",
+            "description" : "Name of the product"
           },
           "description" : {
             "type" : "string",
-            "description" : "Description of RSystem"
+            "description" : "Description of the product",
+            "example" : "Description of RStudio"
           },
           "image" : {
             "type" : "string",
             "description" : "Path to the image",
-            "example" : "/images/componentRSystem.gif"
+            "example" : "https://jupyter.org/assets/nav_logo.svg"
+          },
+          "location" : {
+            "type" : "string",
+            "description" : "Location of the product",
+            "example" : "EU"
+          },
+          "questions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ProductQuestionDTO"
+            }
           }
         }
       },
-      "ComponentInstance" : {
+      "ProductRequest" : {
+        "type" : "object",
+        "description" : "Product Definition",
         "properties" : {
           "name" : {
             "type" : "string",
-            "example" : "RStudio component"
+            "example" : "RStudio"
           },
-          "EnvironmentsStatus" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/EnvironmentStatus"
-            }
-          }
-        }
-      },
-      "ComponentInstanceMetadataSurvey" : {
-        "properties" : {
-          "id" : {
+          "description" : {
             "type" : "string",
-            "format" : "uuid"
+            "description" : "Description of RStudio"
           },
-          "name" : {
-            "type" : "string"
+          "image" : {
+            "type" : "string",
+            "description" : "Path to the image",
+            "example" : "/images/componentRStudio.gif"
           },
-          "EnvironmentStatusMetadataSurveys" : {
+          "questions" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/EnvironmentStatusMetadataSurvey"
+              "$ref" : "#/components/schemas/ProductQuestionDTO"
             }
           }
         }
       },
-      "EnvironmentStatusMetadataSurvey" : {
+      "ErrorResponse" : { },
+      "ProductQuestionDTO" : {
+        "type" : "object",
         "properties" : {
-          "environment" : {
-            "$ref" : "#/components/schemas/EnvironmentName"
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the Question",
+            "example" : "Description"
           },
-          "status" : {
-            "$ref" : "#/components/schemas/EnvironmentStatus"
+          "mandatory" : {
+            "type" : "boolean",
+            "description" : "Whether or not this Question should be filled up",
+            "example" : true
           },
-          "metadata" : {
+          "prompt" : {
+            "type" : "string",
+            "description" : "Prompt for question",
+            "example" : "Prompt"
+          },
+          "variableName" : {
+            "type" : "string",
+            "description" : "Name of variable which would contain input defined by user",
+            "example" : "var1"
+          },
+          "answerType" : {
+            "$ref" : "#/components/schemas/ProductQuestionAnswerTypeDTO"
+          }
+        }
+      },
+      "ProductQuestionAnswerTypeDTO" : {
+        "type" : "object",
+        "properties" : {
+          "inputType" : {
+            "type" : "string",
+            "enum" : [ "TEXT", "TEXT_AREA", "PASSWORD", "SINGLE_SELECT_LIST", "MULTIPLE_SELECT_LIST", "INTEGER", "FLOAT" ],
+            "example" : "TEXT"
+          },
+          "answerClassType" : {
+            "type" : "string",
+            "enum" : [ "ChooseAnswerType", "MinMaxAnswerType", "WrittenSingleAnswerType" ],
+            "example" : "WrittenSingleAnswerType"
+          },
+          "defaultAnswer" : {
+            "type" : "array",
+            "description" : "Multiple default answers or Just one",
+            "items" : {
+              "type" : "string"
+            },
+            "example" : [ "var1", "var2" ]
+          },
+          "options" : {
+            "description" : "All possible options",
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Metadata"
+              "description" : "One from many Answers",
+              "type" : "string",
+              "example" : "Option1"
             }
           },
-          "surveyList" : {
+          "minimum" : {
+            "type" : "string",
+            "description" : "Minimum value",
+            "example" : "1"
+          },
+          "maximum" : {
+            "type" : "string",
+            "description" : "Maximum value",
+            "example" : "50"
+          }
+        }
+      },
+      "EnvironmentsTypeDTO" : {
+        "type" : "string",
+        "enum" : [ "DEV", "QA", "PROD" ],
+        "example" : "DEV"
+      },
+      "EnvironmentsStatusDTO" : {
+        "type" : "string",
+        "enum" : [ "READY", "RUNNING", "FAILED" ],
+        "example" : "READY"
+      },
+      "AnswerDTO" : {
+        "properties" : {
+          "variable" : {
+            "type" : "string",
+            "description" : "variable name",
+            "example" : "var1"
+          },
+          "value" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Survey"
+              "description" : "One from many Answers",
+              "type" : "string",
+              "example" : "Option1"
             }
           }
         }
       },
-      "Metadata" : {
+      "MetaDataDTO" : {
         "properties" : {
           "key" : {
             "type" : "string",
+            "description" : "Metadata key's name",
             "example" : "Metadata key"
           },
           "value" : {
             "type" : "string",
+            "description" : "Metadata key's value",
             "example" : "Metadata value"
           }
         }
       },
-      "ModelError" : { },
-      "Answer" : {
-        "description" : "One from many Answers",
-        "type" : "string",
-        "example" : "Option1"
-      },
-      "Question" : {
+      "ComponentInstanceDTO" : {
         "properties" : {
-          "prompt" : {
+          "id" : {
             "type" : "string",
-            "description" : "prompt"
+            "format" : "uuid",
+            "description" : "ID of ComponentInstance inside of workspace's environment",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
           },
-          "description" : {
-            "type" : "string"
+          "environment" : {
+            "$ref" : "#/components/schemas/EnvironmentsTypeDTO"
           },
-          "variableName" : {
-            "type" : "string"
+          "status" : {
+            "$ref" : "#/components/schemas/EnvironmentsStatusDTO"
           },
-          "answerType" : {
-            "type" : "string",
-            "enum" : [ "EXT", "TEXT_AREA", "PASSWORD", "SINGLE_SELECT_LIST", "MULTIPLE_SELECT_LIST", "INTEGER", "FLOAT" ]
+          "metaDatas" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MetaDataDTO"
+            }
           },
-          "mandatory" : {
-            "type" : "boolean"
+          "answers" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AnswerDTO"
+            }
+          }
+        }
+      },
+      "EnvironmentDTO" : {
+        "properties" : {
+          "environment" : {
+            "$ref" : "#/components/schemas/EnvironmentsTypeDTO"
           },
-          "hidden" : {
-            "type" : "boolean"
+          "status" : {
+            "$ref" : "#/components/schemas/EnvironmentsStatusDTO"
           }
         }
       }
