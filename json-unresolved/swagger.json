@@ -267,6 +267,9 @@
           "404" : {
             "$ref" : "#/components/responses/NotFound"
           },
+          "409" : {
+            "$ref" : "#/components/responses/Conflict"
+          },
           "500" : {
             "$ref" : "#/components/responses/ServerError"
           }
@@ -753,6 +756,16 @@
         }
       },
       "ServerError" : {
+        "description" : "",
+        "content" : {
+          "*/*" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Conflict" : {
         "description" : "",
         "content" : {
           "*/*" : {
