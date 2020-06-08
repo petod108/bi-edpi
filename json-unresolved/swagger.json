@@ -20,6 +20,28 @@
     "description" : "Operations available to regular developers"
   } ],
   "paths" : {
+    "/authenticate" : {
+      "post" : {
+        "tags" : [ ],
+        "summary" : "Get access to user",
+        "description" : "As user, I want to have access",
+        "operationId" : "authenticateUser",
+        "requestBody" : {
+          "description" : "",
+          "required" : false,
+          "content" : {
+            "application/json" : {
+              "schema" : { }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/AuthenticateRespond"
+          }
+        }
+      }
+    },
     "/workspaces" : {
       "get" : {
         "tags" : [ ],
@@ -692,6 +714,13 @@
     "url" : "https://virtserver.swaggerhub.com/bi-edpi/component-inventory_api/1.0.1-oas3"
   } ],
   "components" : {
+    "securitySchemes" : {
+      "ApiKeyAuth" : {
+        "type" : "apiKey",
+        "in" : "header",
+        "name" : "Authorization"
+      }
+    },
     "requestBodies" : {
       "ProductRequestAddUpdate" : {
         "required" : true,
@@ -777,6 +806,16 @@
       },
       "ResetContent" : {
         "description" : "OK"
+      },
+      "AuthenticateRespond" : {
+        "description" : "",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/AuthenticateRespond"
+            }
+          }
+        }
       }
     },
     "schemas" : {
@@ -1206,7 +1245,19 @@
             "$ref" : "#/components/schemas/EnvironmentsStatusDTO"
           }
         }
+      },
+      "AuthenticateRespond" : {
+        "properties" : {
+          "token" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "11f5cce3-6c15-4c68-841c-e9c40c6c3423"
+          }
+        }
       }
     }
-  }
+  },
+  "security" : [ {
+    "ApiKeyAuth" : [ ]
+  } ]
 }
